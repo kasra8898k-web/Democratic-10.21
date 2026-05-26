@@ -1,1118 +1,852 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>جمهوری دموکرات 10/21</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>دموکرات 10/21 | وب‌سایت رسمی</title>
   <style>
-    :root{
-      --bg0:#071a3a;         /* آبی تیره پس‌زمینه */
-      --bg1:#0b2a63;         /* تیره‌تر/هدر */
-      --card:#0f3a7a;        /* کارت‌ها */
-      --card2:#0b2f6b;
-      --text:#eaf2ff;        /* متن روشن */
-      --muted:#bcd0ff;       /* متن کم‌رنگ */
-      --primary:#1E88E5;    /* آبی پررنگ */
-      --primary2:#63b3ff;   /* آبی روشن */
-      --line:rgba(99,179,255,.35);
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
-      --radius:18px;
-      --radius2:26px;
-      --max:1100px;
-      --focus: 0 0 0 4px rgba(30,136,229,.25);
-      --btnShadow: 0 16px 35px rgba(30,136,229,.35); 
+    :root {
+      --bg: #0b1b34;
+      --bg2: #0f2550;
+      --panel: rgba(10, 24, 50, 0.78);
+      --panel-2: rgba(17, 41, 83, 0.92);
+      --line: rgba(255,255,255,0.10);
+      --text: #eaf2ff;
+      --muted: #b9c7df;
+      --accent: #4ea1ff;
+      --accent-2: #77c3ff;
+      --accent-3: #2f7dd8;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1180px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
       background:
-        radial-gradient(1200px 700px at 80% -10%, rgba(30,136,229,.35), transparent 55%),
-        radial-gradient(900px 500px at 10% 0%, rgba(99,179,255,.22), transparent 55%),
-        linear-gradient(180deg, var(--bg0), #04112a 65%, #030a18);
-      color:var(--text);
-      line-height:1.75;
-      overflow-x:hidden;
+        radial-gradient(circle at top, rgba(78,161,255,0.18), transparent 35%),
+        radial-gradient(circle at 80% 20%, rgba(119,195,255,0.10), transparent 28%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* پس‌زمینه ذره‌ای */
-    .noise{
-      position:fixed; inset:0;
-      pointer-events:none;
-      background-image:
-        radial-gradient(circle at 20% 10%, rgba(99,179,255,.18) 0 2px, transparent 2px 100%),
-        radial-gradient(circle at 80% 30%, rgba(30,136,229,.16) 0 2px, transparent 2px 100%),
-        radial-gradient(circle at 40% 70%, rgba(99,179,255,.14) 0 2px, transparent 2px 100%);
-      opacity:.7;
-      filter: blur(.2px);
-      mix-blend-mode: screen;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    /* هدر */
-    header{
-      position:sticky; top:0; z-index:50;
-      background: rgba(7,26,58,.72);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(99,179,255,.22);
-    }
-
-    .nav-wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 18px;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      justify-content:space-between;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 240px;
-    }
-
-    .logo{
-      width:44px; height:44px;
-      border-radius:14px;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 45%),
-        linear-gradient(135deg, rgba(99,179,255,.95), rgba(30,136,229,.95));
-      box-shadow: 0 14px 35px rgba(30,136,229,.25);
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(255,255,255,.15);
-      position:relative;
-      overflow:hidden;
-    }
-    .logo:before{
-      content:"";
-      position:absolute;
-      inset:-30px;
-      background: conic-gradient(from 180deg, rgba(255,255,255,.28), transparent 40%, rgba(255,255,255,.12));
-      animation: spin 8s linear infinite;
-      opacity:.65;
-    }
-    .logo span{
-      position:relative;
-      font-weight:900;
-      letter-spacing:.5px;
-      color:#06122e;
-      font-size:14px;
-      background:rgba(255,255,255,.8);
-      padding:7px 10px;
-      border-radius:12px;
-      border:1px solid rgba(0,0,0,.07);
-    }
-
-    @keyframes spin { to { transform: rotate(360deg);} }
-
-    .brand-title{
-      display:flex; flex-direction:column;
-    }
-    .brand-title b{
-      font-size:15px;
-      letter-spacing:.4px;
-    }
-    .brand-title small{
-      color:var(--muted);
-      font-size:12px;
-      margin-top:2px;
-    }
-
-    nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-
-    .navlink{
-      appearance:none;
-      border:1px solid transparent;
-      background:transparent;
-      color:var(--muted);
-      padding:10px 12px;
-      border-radius:14px;
-      cursor:pointer;
-      font-weight:700;
-      font-size:13px;
-      transition: .2s ease;
-    }
-    .navlink:hover{
-      color:var(--text);
-      border-color: rgba(99,179,255,.25);
-      background: rgba(15,58,122,.35);
-      transform: translateY(-1px);
-    }
-    .navlink:focus{ outline:none; box-shadow: var(--focus); }
-
-    .header-cta{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:240px;
-      justify-content:flex-end;
-    }
-
-    .pill{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:999px;
-      background: rgba(15,58,122,.35);
-      border:1px solid rgba(99,179,255,.22);
-      color: var(--muted);
-      font-weight:700;
-      font-size:12px;
-      white-space:nowrap;
-    }
-    .dot{
-      width:8px; height:8px; border-radius:50%;
-      background: var(--primary2);
-      box-shadow: 0 0 0 4px rgba(99,179,255,.16);
-    }
-
-    /* بدنه */
-    main{
-      max-width:var(--max);
+    .container {
+      width: min(100% - 24px, var(--max));
       margin: 0 auto;
-      padding: 26px 18px 60px;
     }
 
-    .hero{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:18px;
-      align-items:stretch;
-      margin-top: 10px;
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      background: rgba(7, 16, 33, 0.72);
+      border-bottom: 1px solid var(--line);
     }
 
-    @media (max-width: 920px){
-      .hero{ grid-template-columns:1fr; }
-      .brand{min-width:auto}
-      .header-cta{min-width:auto}
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 12px;
     }
 
-    .hero-card{
-      background: linear-gradient(180deg, rgba(15,58,122,.55), rgba(11,47,107,.35));
-      border:1px solid rgba(99,179,255,.18);
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      padding: 22px;
-      position:relative;
-      overflow:hidden;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
     }
-    .hero-card:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(500px 220px at 20% 10%, rgba(30,136,229,.45), transparent 55%),
-        radial-gradient(520px 260px at 90% 40%, rgba(99,179,255,.22), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .hero-card > *{ position:relative; }
 
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(30,136,229,.12);
-      border:1px solid rgba(30,136,229,.28);
-      color: #d8ecff;
-      font-weight:800;
-      font-size:12px;
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      box-shadow: 0 10px 30px rgba(78,161,255,0.35);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #fff;
+      flex: 0 0 auto;
     }
-    .kicker svg{opacity:.95}
 
-    h1{
-      margin: 14px 0 10px;
-      font-size: 34px;
-      line-height:1.3;
-      letter-spacing:.2px;
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      min-width: 0;
     }
-    .lead{
-      margin: 0 0 18px;
+
+    .brand-text strong {
+      font-size: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-text span {
+      font-size: 0.86rem;
       color: var(--muted);
-      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 12px;
+      color: var(--muted);
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--text);
+      background: rgba(78,161,255,0.12);
+      border-color: rgba(78,161,255,0.24);
+    }
+
+    .cta-top {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 14px 30px rgba(78,161,255,0.22);
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 28px 0 20px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .side-card,
+    .content-card {
+      background: linear-gradient(180deg, rgba(15,37,80,0.88), rgba(10,24,50,0.86));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+
+    .hero-card {
+      padding: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -70px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(78,161,255,0.22), transparent 65%);
+      pointer-events: none;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(78,161,255,0.12);
+      color: var(--accent-2);
+      border: 1px solid rgba(78,161,255,0.18);
+      font-size: 0.9rem;
+    }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      line-height: 1.35;
+      margin-top: 16px;
+    }
+
+    .hero p {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 1rem;
       max-width: 62ch;
     }
 
-    .hero-actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    /* دکمه دریافت تابعیت */
-    .btn-join{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      text-decoration:none;
-      background: linear-gradient(135deg, var(--primary), #0f62c2);
-      color:white;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-weight:900;
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow: var(--btnShadow);
-      transition: .18s ease;
-      transform: translateZ(0);
-    }
-    .btn-join:hover{
-      transform: translateY(-2px);
-      filter: saturate(1.1);
-      background: linear-gradient(135deg, #2b9cff, #0a4fa4);
-    }
-    .btn-join:focus{ outline:none; box-shadow: var(--btnShadow), var(--focus); }
-
-    .btn-ghost{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      text-decoration:none;
-      background: rgba(15,58,122,.25);
-      color: var(--text);
-      padding: 14px 16px;
-      border-radius: 16px;
-      font-weight:900;
-      border:1px solid rgba(99,179,255,.25);
-      transition: .18s ease;
-    }
-    .btn-ghost:hover{
-      transform: translateY(-2px);
-      background: rgba(15,58,122,.38);
-      border-color: rgba(99,179,255,.35);
-    }
-
-    .hero-side{
-      display:grid;
-      gap:14px;
-      align-content:start;
-    }
-
-    .stat-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-
-    .stat{
-      background: linear-gradient(180deg, rgba(15,58,122,.5), rgba(11,47,107,.25));
-      border:1px solid rgba(99,179,255,.18);
-      border-radius: var(--radius);
-      padding: 16px;
-      position:relative;
-      overflow:hidden;
-    }
-    .stat:after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -60px auto;
-      width:140px; height:140px;
-      background: radial-gradient(circle, rgba(99,179,255,.35), transparent 60%);
-      transform: rotate(15deg);
-    }
-    .stat > *{ position:relative; }
-
-    .stat b{ font-size:22px; letter-spacing:.2px; }
-    .stat span{ display:block; margin-top:6px; color:var(--muted); font-weight:800; font-size:12px; }
-
-    .seal{
-      background: rgba(7,26,58,.35);
-      border:1px solid rgba(99,179,255,.18);
-      border-radius: var(--radius2);
-      padding:16px;
-      overflow:hidden;
-      position:relative;
-    }
-    .seal .seal-top{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-    }
-    .seal h3{
-      margin:0;
-      font-size:14px;
-      color:#dbeaff;
-      letter-spacing:.2px;
-    }
-    .seal p{
-      margin:10px 0 0;
-      color:var(--muted);
-      font-weight:700;
-      font-size:13px;
-    }
-    .seal .sig{
-      width:74px; height:74px; border-radius:22px;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 45%),
-        linear-gradient(135deg, rgba(99,179,255,.95), rgba(30,136,229,.95));
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow: 0 16px 35px rgba(30,136,229,.22);
-      display:grid; place-items:center;
-      color:#06122e;
-      font-weight:1000;
-    }
-
-    /* بخش‌ها */
-    .section{
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
       margin-top: 22px;
-      display:none;
-      animation: fade .25s ease;
-    }
-    .section.active{ display:block; }
-
-    @keyframes fade{
-      from {opacity:0; transform: translateY(6px)}
-      to   {opacity:1; transform: translateY(0)}
     }
 
-    .section-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      margin: 8px 0 14px;
-    }
-    .section-head h2{
-      margin:0;
-      font-size:20px;
-      letter-spacing:.2px;
-    }
-    .section-head p{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-weight:800;
-      font-size:13px;
-      max-width: 60ch;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-    }
-    @media (max-width: 920px){
-      .grid-2{ grid-template-columns:1fr; }
-    }
-
-    .card{
-      background: linear-gradient(180deg, rgba(15,58,122,.52), rgba(11,47,107,.22));
-      border:1px solid rgba(99,179,255,.18);
-      border-radius: var(--radius2);
-      box-shadow: 0 14px 35px rgba(0,0,0,.18);
-      padding: 18px;
-      overflow:hidden;
-      position:relative;
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(420px 220px at 10% 0%, rgba(30,136,229,.25), transparent 55%),
-        radial-gradient(380px 260px at 95% 45%, rgba(99,179,255,.12), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .card > *{ position:relative; }
-
-    .card h3{
-      margin:0 0 10px;
-      font-size:15px;
-      letter-spacing:.2px;
-    }
-    .card .muted{ color:var(--muted); font-weight:800; font-size:13px; margin:0; }
-    .divider{
-      height:1px; background: rgba(99,179,255,.22);
-      margin: 14px 0;
-    }
-
-    ul.clean{
-      margin:10px 0 0; padding:0;
-      list-style:none;
-      display:grid;
-      gap:10px;
-    }
-    ul.clean li{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      color:var(--muted);
-      font-weight:800;
-      font-size:13px;
-    }
-    .check{
-      width:18px; height:18px;
-      border-radius:7px;
-      background: rgba(30,136,229,.18);
-      border:1px solid rgba(30,136,229,.35);
-      display:grid; place-items:center;
-      flex:0 0 auto;
-      margin-top:2px;
-    }
-
-    /* جدول/لیست رسمی */
-    .table{
-      width:100%;
-      border-collapse:separate;
-      border-spacing:0;
-      overflow:hidden;
-      border-radius: var(--radius2);
-      border:1px solid rgba(99,179,255,.18);
-      background: rgba(11,47,107,.18);
-    }
-    .table th, .table td{
-      padding: 12px 14px;
-      border-bottom:1px solid rgba(99,179,255,.14);
-      text-align:right;
-      font-weight:800;
-      font-size:13px;
-    }
-    .table th{
-      color:#dbeaff;
-      background: rgba(30,136,229,.08);
-    }
-    .table td{ color: var(--muted); }
-    .table tr:last-child td{ border-bottom:none; }
-
-    .news{
-      display:grid;
-      gap:12px;
-    }
-    .news-item{
-      display:flex;
-      gap:14px;
-      padding: 14px;
-      border-radius: var(--radius2);
-      border:1px solid rgba(99,179,255,.18);
-      background: rgba(15,58,122,.22);
-      transition:.18s ease;
-    }
-    .news-item:hover{
-      transform: translateY(-2px);
-      background: rgba(15,58,122,.3);
-      border-color: rgba(99,179,255,.28);
-    }
-    .badge{
-      flex:0 0 auto;
-      padding:8px 10px;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
       border-radius: 14px;
-      background: rgba(30,136,229,.12);
-      border:1px solid rgba(30,136,229,.28);
-      color:#d8ecff;
-      font-weight:1000;
-      font-size:12px;
-      height:max-content;
-      white-space:nowrap;
-    }
-    .news-item b{
-      display:block;
-      color: var(--text);
-      font-size:14px;
-      margin-top:2px;
-    }
-    .news-item p{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-weight:800;
-      font-size:13px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      cursor: pointer;
     }
 
-    /* فرم تماس */
-    form{
-      display:grid;
-      gap:12px;
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      color: #fff;
     }
-    label{
-      font-weight:900;
-      color:#dbeaff;
-      font-size:13px;
-      display:block;
-      margin-bottom:8px;
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      border-color: var(--line);
+      color: var(--text);
     }
-    .field{
-      width:100%;
-      padding: 12px 12px;
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .side-card {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .side-box {
+      padding: 16px;
       border-radius: 16px;
-      border:1px solid rgba(99,179,255,.22);
-      background: rgba(7,26,58,.22);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+    }
+
+    .side-box h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .side-box p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    /* Sections */
+    .page {
+      display: none;
+      padding: 18px 0 36px;
+    }
+
+    .page.active {
+      display: block;
+      animation: fadeIn 0.28s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .content-card {
+      padding: 22px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+    }
+
+    .section-head p {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 70ch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+    }
+
+    .mini-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+    }
+
+    .mini-card p, .mini-card li {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 0.95rem;
+    }
+
+    .mini-card ul {
+      margin: 10px 0 0;
+      padding-right: 18px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    th {
+      color: #dce8ff;
+      background: rgba(255,255,255,0.04);
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    .news-list, .contact-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .news-item, .contact-item {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+    }
+
+    .news-item h3, .contact-item h3 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .news-item p, .contact-item p {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 0.95rem;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
       color: var(--text);
-      outline:none;
-      transition: .18s ease;
-      font-weight:800;
-    }
-    .field::placeholder{ color: rgba(188,208,255,.65); font-weight:800; }
-    .field:focus{
-      box-shadow: var(--focus);
-      border-color: rgba(99,179,255,.45);
-    }
-    textarea.field{ min-height: 110px; resize: vertical; }
-
-    .form-row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    @media (max-width: 720px){ .form-row{ grid-template-columns:1fr; } }
-
-    .footer{
-      margin-top: 34px;
-      color: rgba(188,208,255,.8);
-      text-align:center;
-      font-weight:800;
-      font-size:12px;
-      padding-bottom: 14px;
+      border-radius: 14px;
+      padding: 14px 14px;
+      outline: none;
+      font: inherit;
     }
 
-    /* دسترسی */
-    .sr-only{
-      position:absolute;
-      width:1px; height:1px;
-      padding:0; margin:-1px;
-      overflow:hidden;
-      clip:rect(0,0,0,0);
-      white-space:nowrap;
-      border:0;
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #9fb1cc;
+    }
+
+    footer {
+      padding: 18px 0 26px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        padding: 10px 0;
+      }
+
+      nav ul {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .cta-top {
+        margin-inline-start: auto;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .menu-btn {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      nav ul {
+        display: none;
+        width: 100%;
+        padding: 10px 0 4px;
+        gap: 6px;
+      }
+
+      nav ul.open {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      nav a {
+        width: 100%;
+      }
+
+      .cta-top {
+        width: 100%;
+        margin-inline-start: 0;
+      }
+
+      .hero-card,
+      .content-card,
+      .side-card {
+        padding: 18px;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: min(100% - 16px, var(--max));
+      }
+
+      nav ul.open {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-text span {
+        display: none;
+      }
+
+      .hero p, .mini-card p, .news-item p, .contact-item p {
+        font-size: 0.92rem;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="noise" aria-hidden="true"></div>
 
-  <header>
-    <div class="nav-wrap">
-      <div class="brand" role="banner" aria-label="لوگو و نام کشور">
-        <div class="logo" aria-hidden="true"><span>10/21</span></div>
-        <div class="brand-title">
-          <b>دموکرات 10/21</b>
-          <small>سامانه رسمی کشور خیالی</small>
+<header>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">D</div>
+        <div class="brand-text">
+          <strong>دموکرات 10/21</strong>
+          <span>وب‌سایت رسمی و موبایل‌فرندلی</span>
         </div>
       </div>
 
-      <nav aria-label="ناوبری">
-        <button class="navlink" data-page="home">صفحه اصلی</button>
-        <button class="navlink" data-page="about">درباره</button>
-        <button class="navlink" data-page="government">دولت</button>
-        <button class="navlink" data-page="laws">قوانین</button>
-        <button class="navlink" data-page="news">اخبار</button>
-        <button class="navlink" data-page="contact">تماس</button>
+      <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو">☰</button>
+
+      <nav>
+        <ul id="navLinks">
+          <li><a href="#" class="nav-link active" data-page="home">صفحه اصلی</a></li>
+          <li><a href="#" class="nav-link" data-page="about">درباره</a></li>
+          <li><a href="#" class="nav-link" data-page="government">دولت</a></li>
+          <li><a href="#" class="nav-link" data-page="laws">قوانین</a></li>
+          <li><a href="#" class="nav-link" data-page="news">اخبار</a></li>
+          <li><a href="#" class="nav-link" data-page="contact">تماس</a></li>
+        </ul>
       </nav>
 
-      <div class="header-cta">
-        <div class="pill" title="وضعیت رسمی سامانه">
-          <span class="dot" aria-hidden="true"></span>
-          <span>فعال • نسخه نمایشی</span>
-        </div>
-      </div>
+      <a class="cta-top" href="https://ble.ir/join/HgMRZB1M73" target="_blank" rel="noopener">
+        دریافت تابعیت
+      </a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <!-- HERO / HOME -->
-    <section class="section active" id="page-home" aria-labelledby="home-title">
-      <div class="hero">
+<main class="container">
+
+  <!-- Home -->
+  <section class="page active" id="home">
+    <div class="hero">
+      <div class="hero-grid">
         <div class="hero-card">
-          <div class="kicker">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7z" stroke="currentColor" stroke-width="2"/>
-            </svg>
-            نظم، مشارکت، تعالی
-          </div>
-
-          <h1 id="home-title">جمهوری دموکرات 10/21</h1>
-          <p class="lead">
-            وب‌سایت رسمی کشور خیالی «دموکرات 10/21» با ساختار مدرن، شفافیت نهادی و ارتباط مستقیم با شهروندان.
-            تمام بخش‌ها برای ارائه یک تصویر حرفه‌ای و رسمی طراحی شده‌اند.
+          <span class="tag">🇮🇷 پورتال رسمی کشور خیالی دموکرات 10/21</span>
+          <h1>یک وب‌سایت رسمی، شیک و کاملاً مناسب نمایش در موبایل</h1>
+          <p>
+            این نسخه برای نمایش در گوشی بهینه شده تا منو، دکمه‌ها، کارت‌ها و متن‌ها
+            در صفحه کوچک هم مرتب، خوانا و حرفه‌ای باشند.
           </p>
 
           <div class="hero-actions">
-            <a class="btn-join" href="https://ble.ir/join/HgMRZB1M73" target="_blank" rel="noopener">
-              دریافت تابعیت
-              <span aria-hidden="true">↗</span>
-            </a>
-
-            <a class="btn-ghost" href="#"
-               data-page-jump="about">
-              معرفی کشور
-              <span aria-hidden="true">→</span>
-            </a>
+            <a class="btn btn-primary" href="https://ble.ir/join/HgMRZB1M73" target="_blank" rel="noopener">دریافت تابعیت</a>
+            <a class="btn btn-secondary" href="#about">مشاهده معرفی</a>
           </div>
 
-          <div class="divider"></div>
-
-          <div class="grid-2">
-            <div>
-              <h3 style="margin:0 0 8px;">چرخه حکمرانی</h3>
-              <p class="muted">
-                تصمیم‌گیری با مشارکت، اجرا با مسئولیت‌پذیری و نظارت با شفافیت.
-                هدف، ایجاد اعتماد پایدار میان شهروند و نهادهای عمومی است.
-              </p>
-              <ul class="clean">
-                <li>
-                  <span class="check" aria-hidden="true">✓</span>
-                  انتشار اطلاعیه‌ها با قالب رسمی
-                </li>
-                <li>
-                  <span class="check" aria-hidden="true">✓</span>
-                  تفکیک وظایف دستگاه‌ها و پاسخ‌گویی
-                </li>
-                <li>
-                  <span class="check" aria-hidden="true">✓</span>
-                  دسترسی آسان به قوانین و روندها
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 style="margin:0 0 8px;">نقش حاکم</h3>
-              <p class="muted">
-                حاکم «بیات عباسی» به عنوان نماد هدایت کلان و پاسداری از چارچوب حقوقی،
-                زمینه اجرای قوانین و شکل‌گیری مسیرهای پیشرفت را فراهم می‌کند.
-              </p>
-              <div class="divider"></div>
-              <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <span class="badge" style="background:rgba(99,179,255,.12); border-color:rgba(99,179,255,.28);">رهبری راهبردی</span>
-                <span class="badge">پاسخ‌گویی نهادی</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-side">
-          <div class="stat-grid">
+          <div class="hero-stats">
             <div class="stat">
-              <b>10/21</b>
-              <span>هویت عددی و رسمی</span>
+              <strong>طراحی ریسپانسیو</strong>
+              <span>نمایش عالی در موبایل، تبلت و دسکتاپ</span>
             </div>
             <div class="stat">
-              <b>آبی</b>
-              <span>پالت رسمی کشور</span>
-            </div>
-          </div>
-
-          <div class="seal">
-            <div class="seal-top">
-              <h3>حاکم عالی‌مقام</h3>
-              <div class="sig" aria-hidden="true">ب.ع</div>
-            </div>
-            <p>
-              «بیات عباسی» — هدایت کلان، صیانت از چارچوب و تضمین نظم عمومی در جمهوری دموکرات 10/21.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>میان‌بر رسمی</h3>
-            <p class="muted">به بخش موردنظر بروید یا درخواست خود را برای عضویت ثبت کنید.</p>
-            <div class="divider"></div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-              <a class="btn-ghost" style="padding:12px 14px;" href="#" data-page-jump="laws">قوانین</a>
-              <a class="btn-ghost" style="padding:12px 14px;" href="#" data-page-jump="news">اخبار</a>
+              <strong>سبک رسمی</strong>
+              <span>رنگ‌بندی آبی و چیدمان حرفه‌ای</span>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ABOUT -->
-    <section class="section" id="page-about" aria-labelledby="about-title">
+        <div class="side-card">
+          <div class="side-box">
+            <h3>ویژگی اصلی</h3>
+            <p>منوی جمع‌شونده، کارت‌های مرتب و دکمه‌های مناسب لمس برای کاربران موبایل.</p>
+          </div>
+          <div class="side-box">
+            <h3>دسترسی سریع</h3>
+            <p>از طریق منو می‌توانی بین بخش‌ها جابه‌جا شوی، بدون اینکه صفحه شلوغ شود.</p>
+          </div>
+          <div class="side-box">
+            <h3>لینک تابعیت</h3>
+            <p>دکمه دریافت تابعیت در هدر و صفحه اصلی قرار دارد تا همیشه در دسترس باشد.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="page" id="about">
+    <div class="content-card">
       <div class="section-head">
         <div>
-          <h2 id="about-title">درباره کشور</h2>
-          <p>نگاه رسمی به فلسفه حکمرانی، ارزش‌ها و روایت هویت «دموکرات 10/21».</p>
+          <h2>درباره دموکرات 10/21</h2>
+          <p>بخشی برای معرفی هویت، هدف و تصویر رسمی سایت با ظاهری مدرن و ساده.</p>
         </div>
       </div>
 
-      <div class="grid-2">
-        <div class="card">
-          <h3>فلسفه حکمرانی</h3>
-          <p class="muted">
-            جمهوری دموکرات 10/21 بر ترکیب «مشارکت» و «نظم حقوقی» بنا شده است.
-            مشارکت شهروندان در مسیرهای شفاف، همراه با اجرای قانون و نظارت دقیق،
-            زمینه ثبات و پیشرفت را ایجاد می‌کند.
-          </p>
-          <div class="divider"></div>
-          <ul class="clean">
-            <li><span class="check" aria-hidden="true">✓</span> تصمیم‌ها قابل فهم و قابل پیگیری باشند.</li>
-            <li><span class="check" aria-hidden="true">✓</span> اجرای برنامه‌ها با معیارهای مشخص انجام شود.</li>
-            <li><span class="check" aria-hidden="true">✓</span> شفافیت منبع اعتماد عمومی باشد.</li>
-          </ul>
+      <div class="grid-3">
+        <div class="mini-card">
+          <h3>هویت رسمی</h3>
+          <p>ساختار صفحه طوری طراحی شده که حس یک پورتال رسمی و مرتب را منتقل کند.</p>
         </div>
-
-        <div class="card">
-          <h3>حاکم: بیات عباسی</h3>
-          <p class="muted">
-            حاکم عالی‌مقام، «بیات عباسی»، مسئولیت پاسداری از چارچوب کلی کشور و راهبردهای کلان را بر عهده دارد.
-            رویکرد ایشان «نظم در کنار مشارکت» است؛ یعنی تصمیمات با پشتوانه حقوقی و با توجه به آینده انجام می‌شود.
-          </p>
-          <div class="divider"></div>
-          <table class="table" role="table" aria-label="شرح وظایف کلان حاکم">
-            <thead>
-              <tr>
-                <th>حوزه</th>
-                <th>توصیف</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>راهبری کلان</td>
-                <td>تنظیم جهت‌گیری‌های عمومی و سیاست‌های اولویت‌دار</td>
-              </tr>
-              <tr>
-                <td>صیانت حقوقی</td>
-                <td>حمایت از چارچوب قانونی و تضمین اجرای درست آن</td>
-              </tr>
-              <tr>
-                <td>پاسخ‌گویی</td>
-                <td>اطلاع‌رسانی رسمی درباره اقدامات و گزارش‌های کلان</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="mini-card">
+          <h3>ظاهر موبایل</h3>
+          <p>در نمایشگرهای کوچک، کارت‌ها زیر هم قرار می‌گیرند و خوانایی بهتر می‌شود.</p>
+        </div>
+        <div class="mini-card">
+          <h3>تجربه کاربری</h3>
+          <p>دکمه‌ها بزرگ‌تر شده‌اند تا لمس آن‌ها در گوشی راحت‌تر باشد.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="card" style="margin-top:14px;">
-        <h3>بیانیه هویت</h3>
-        <p class="muted">
-          «10/21» نماد چرخه‌ای از نظم و اصلاح مستمر است: هر مرحله، یادگیری؛ هر یادگیری، بهبود.
-          دموکرات 10/21 متعهد است که مسیر شهروندی را شفاف، قابل پیگیری و رسمی نگه دارد.
-        </p>
-      </div>
-    </section>
-
-    <!-- GOVERNMENT -->
-    <section class="section" id="page-government" aria-labelledby="gov-title">
+  <!-- Government -->
+  <section class="page" id="government">
+    <div class="content-card">
       <div class="section-head">
         <div>
-          <h2 id="gov-title">ساختار دولت</h2>
-          <p>تشریح نقش نهادها و تفکیک مسئولیت‌ها برای اداره شفاف کشور.</p>
+          <h2>ساختار دولت</h2>
+          <p>نمایش اطلاعات نمونه به صورت جدول برای اینکه در موبایل هم مرتب دیده شود.</p>
         </div>
       </div>
 
-      <div class="grid-2">
-        <div class="card">
-          <h3>قوه مقننه (چارچوب‌ساز)</h3>
-          <p class="muted">
-            تدوین و اصلاح چارچوب‌های قانونی با رویکرد شفافیت و قابلیت اجرا.
-            قوانین باید روشن، قابل سنجش و قابل تفسیر باشند.
-          </p>
-          <div class="divider"></div>
-          <ul class="clean">
-            <li><span class="check" aria-hidden="true">✓</span> فرآیند بررسی و انتشار عمومی</li>
-            <li><span class="check" aria-hidden="true">✓</span> گزارش پیشرفت تدوین قوانین</li>
-            <li><span class="check" aria-hidden="true">✓</span> هماهنگی با قوه قضاییه</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>قوه مجریه (اجراکننده)</h3>
-          <p class="muted">
-            اجرای سیاست‌ها و برنامه‌های عمومی در حوزه‌های خدمات‌رسانی، زیرساخت و توسعه.
-            تمرکز بر نتایج و گزارش‌های رسمی دوره‌ای است.
-          </p>
-          <div class="divider"></div>
-          <ul class="clean">
-            <li><span class="check" aria-hidden="true">✓</span> اجرای برنامه‌های مصوب</li>
-            <li><span class="check" aria-hidden="true">✓</span> مدیریت منابع و اولویت‌بندی</li>
-            <li><span class="check" aria-hidden="true">✓</span> گزارش‌دهی شفاف</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:14px;">
-        <h3>قوه قضاییه (ناظر بر قانون)</h3>
-        <p class="muted">
-          تضمین اجرای درست قانون، رسیدگی به اختلافات و حمایت از حقوق عمومی.
-          تصمیم‌ها باید مستند و قابل استناد باشند.
-        </p>
-
-        <div class="divider"></div>
-
-        <table class="table" aria-label="جدول مسئولیت‌های نهاد قضایی">
+      <div class="table-wrap">
+        <table>
           <thead>
             <tr>
-              <th>حوزه</th>
-              <th>هدف</th>
+              <th>سمت</th>
+              <th>نام</th>
+              <th>توضیح</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>رسیدگی</td>
-              <td>حل اختلافات با رویکرد مستند و منصفانه</td>
+              <td>حاکم</td>
+              <td>بیات عباسی</td>
+              <td>مرکز مدیریت و تصمیم‌گیری</td>
             </tr>
             <tr>
-              <td>تفسیر</td>
-              <td>توضیح چارچوب قانونی برای جلوگیری از ابهام</td>
+              <td>سخنگو</td>
+              <td>نمونه</td>
+              <td>اطلاع‌رسانی عمومی</td>
             </tr>
             <tr>
-              <td>نظارت</td>
-              <td>پایش اجرای قانون در سطح نهادها</td>
+              <td>روابط عمومی</td>
+              <td>نمونه</td>
+              <td>ارتباط با اعضا و بازدیدکنندگان</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </section>
-
-    <!-- LAWS -->
-    <section class="section" id="page-laws" aria-labelledby="laws-title">
-      <div class="section-head">
-        <div>
-          <h2 id="laws-title">قوانین و سیاست‌ها</h2>
-          <p>چکیده اصول رسمی و مسیرهای شهروندی در جمهوری دموکرات 10/21.</p>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card">
-          <h3>اصول بنیادین</h3>
-          <p class="muted">
-            قانون‌اساسیِ کشور خیالی بر پایه شفافیت، مسئولیت‌پذیری و برابری فرصت‌ها بنا شده است.
-            این بخش نمونه‌ای از ارائه رسمی قوانین است.
-          </p>
-          <div class="divider"></div>
-          <ul class="clean">
-            <li><span class="check" aria-hidden="true">✓</span> حاکمیت متعلق به ملت است؛ اجرا به نمایندگی شایسته سپرده می‌شود.</li>
-            <li><span class="check" aria-hidden="true">✓</span> تصمیم‌ها با دلیل و سند ارائه می‌شوند.</li>
-            <li><span class="check" aria-hidden="true">✓</span> حقوق شهروندان تضمین می‌گردد.</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>سیاست‌های کلان</h3>
-          <p class="muted">
-            مسیرهایی که نشان می‌دهد کشور چگونه به اهداف می‌رسد: از برنامه‌ریزی تا گزارش رسمی.
-          </p>
-          <div class="divider"></div>
-          <table class="table" aria-label="لیست سیاست‌های کلان">
-            <thead>
-              <tr>
-                <th>موضوع</th>
-                <th>رویکرد</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>شفافیت</td>
-                <td>انتشار اطلاعیه‌ها و گزارش‌های دوره‌ای</td>
-              </tr>
-              <tr>
-                <td>مشارکت</td>
-                <td>پیشبرد نظر شهروندان در چارچوب قانون</td>
-              </tr>
-              <tr>
-                <td>نظم حقوقی</td>
-                <td>تفکیک مسئولیت‌ها و تضمین اجرای قانون</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:14px;">
-        <h3>درخواست شهروندی</h3>
-        <p class="muted">
-          برای شروع روند رسمی، از دکمه «دریافت تابعیت» استفاده کنید.
-          این سایت نمونه‌ای است برای نمایش طراحی حرفه‌ای و ساختار صفحه‌ای.
-        </p>
-        <div class="divider"></div>
-        <a class="btn-join" href="https://ble.ir/join/HgMRZB1M73" target="_blank" rel="noopener">
-          دریافت تابعیت
-          <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- NEWS -->
-    <section class="section" id="page-news" aria-labelledby="news-title">
-      <div class="section-head">
-        <div>
-          <h2 id="news-title">اخبار و اطلاعیه‌ها</h2>
-          <p>نمونه کارت خبرها با استایل رسمی. می‌توانید در آینده با محتوای واقعی جایگزین کنید.</p>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="news">
-          <div class="news-item">
-            <div class="badge">اطلاعیه</div>
-            <div>
-              <b>انتشار نسخه راهنمای شهروندی 10/21</b>
-              <p>راهنمای رسمی مسیرهای ثبت درخواست و پیگیری وضعیت در چارچوب قوانین منتشر شد.</p>
-            </div>
-          </div>
-          <div class="news-item">
-            <div class="badge">خبر</div>
-            <div>
-              <b>گزارش دوره‌ای شفافیت نهادی</b>
-              <p>گزارش سه‌ماهه پیشرفت برنامه‌ها و نحوه اجرای سیاست‌ها منتشر گردید.</p>
-            </div>
-          </div>
-          <div class="news-item">
-            <div class="badge">بروزرسانی</div>
-            <div>
-              <b>به‌روزرسانی سامانه انتشار قوانین</b>
-              <p>قالب‌های رسمی و صفحه‌بندی قوانین اصلاح شد تا دسترسی شهروندان بهتر شود.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>بخش اطلاعیه رسمی</h3>
-          <p class="muted">
-            این بخش برای اعلان‌های مهم (مانند تغییرات قوانین، گزارش‌ها و رویدادهای رسمی) طراحی شده است.
-          </p>
-          <div class="divider"></div>
-          <ul class="clean">
-            <li><span class="check" aria-hidden="true">✓</span> قالب یکسان برای اعتبار و خوانایی</li>
-            <li><span class="check" aria-hidden="true">✓</span> نمایش سریع متن خبر</li>
-            <li><span class="check" aria-hidden="true">✓</span> مسیر مشخص برای اقدام بعدی</li>
-          </ul>
-
-          <div class="divider"></div>
-
-          <a class="btn-ghost" style="width:100%; justify-content:center;" href="#" data-page-jump="contact">
-            ثبت پیام به دولت
-            <span aria-hidden="true">→</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="page-contact" aria-labelledby="contact-title">
-      <div class="section-head">
-        <div>
-          <h2 id="contact-title">تماس با ما / درخواست شهروندی</h2>
-          <p>فرم ارتباط رسمی + دکمه نهایی «دریافت تابعیت» با لینک مشخص.</p>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card">
-          <h3>ارسال پیام رسمی</h3>
-          <p class="muted">در این نمونه، فرم ارسال نمی‌کند (برای نمایش UI طراحی شده است). اگر خواستی می‌تونم اتصال بک‌اند هم پیشنهاد بدم.</p>
-          <div class="divider"></div>
-
-          <form id="contactForm">
-            <div class="form-row">
-              <div>
-                <label for="name">نام و نام خانوادگی</label>
-                <input class="field" id="name" name="name" type="text" placeholder="مثلاً علی رضایی" required />
-              </div>
-              <div>
-                <label for="email">ایمیل</label>
-                <input class="field" id="email" name="email" type="email" placeholder="name@example.com" required />
-              </div>
-            </div>
-
-            <div>
-              <label for="topic">موضوع</label>
-              <input class="field" id="topic" name="topic" type="text" placeholder="پرسش درباره قوانین / ثبت درخواست..." required />
-            </div>
-
-            <div>
-              <label for="message">پیام</label>
-              <textarea class="field" id="message" name="message" placeholder="متن پیام خود را بنویسید..." required></textarea>
-            </div>
-
-            <button class="btn-ghost" type="submit" style="justify-content:center;">
-              ارسال پیام (نمونه)
-              <span aria-hidden="true">✉️</span>
-            </button>
-
-            <p class="muted" id="formHint" style="margin:0; font-size:12px;"></p>
-          </form>
-        </div>
-
-        <div class="card">
-          <h3>دریافت تابعیت</h3>
-          <p class="muted">
-            برای شروع مسیر رسمی، دکمه زیر را انتخاب کنید. لینک به آدرس مشخص هدایت می‌شود.
-          </p>
-          <div class="divider"></div>
-
-          <a id="joinMainBtn" class="btn-join" href="https://ble.ir/join/HgMRZB1M73" target="_blank" rel="noopener">
-            دریافت تابعیت
-            <span aria-hidden="true">↗</span>
-          </a>
-
-          <div class="divider"></div>
-
-          <h3 style="margin-top:0;">راهنمای کوتاه</h3>
-          <ul class="clean">
-            <li><span class="check" aria-hidden="true">✓</span> اطلاعات خواسته‌شده را با دقت وارد کنید.</li>
-            <li><span class="check" aria-hidden="true">✓</span> در صورت نیاز، پیام تکمیلی ثبت کنید.</li>
-            <li><span class="check" aria-hidden="true">✓</span> برای پیگیری، از بخش اخبار یا تماس استفاده کنید.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <div class="footer">
-      © <span id="year"></span> دموکرات 10/21 — طراحی نمونه حرفه‌ای (HTML/CSS/JS)
     </div>
-  </main>
+  </section>
 
-  <script>
-    // ناوبری بین صفحات (بدون رفرش)
-    const navButtons = document.querySelectorAll('.navlink');
-    const sections = document.querySelectorAll('.section');
+  <!-- Laws -->
+  <section class="page" id="laws">
+    <div class="content-card">
+      <div class="section-head">
+        <div>
+          <h2>قوانین و مقررات</h2>
+          <p>بخش قوانین به شکل کارت‌های ساده و خوانا طراحی شده است.</p>
+        </div>
+      </div>
 
-    function showPage(page){
-      sections.forEach(s => s.classList.remove('active'));
-      const el = document.getElementById('page-' + page);
-      if (el) el.classList.add('active');
-      // تغییر عنوان کوتاه (اختیاری)
-      try{ history.replaceState(null, "", "#" + page); }catch(e){}
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+      <div class="grid-3">
+        <div class="mini-card">
+          <h3>قانون اول</h3>
+          <p>احترام، نظم و استفاده صحیح از بخش‌های سایت.</p>
+        </div>
+        <div class="mini-card">
+          <h3>قانون دوم</h3>
+          <p>استفاده از دکمه تابعیت فقط برای ورود به مسیر مشخص‌شده.</p>
+        </div>
+        <div class="mini-card">
+          <h3>قانون سوم</h3>
+          <p>رعایت ساختار و هماهنگی در نمایش موبایل و دسکتاپ.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    navButtons.forEach(btn=>{
-      btn.addEventListener('click', ()=> showPage(btn.dataset.page));
-    });
+  <!-- News -->
+  <section class="page" id="news">
+    <div class="content-card">
+      <div class="section-head">
+        <div>
+          <h2>اخبار</h2>
+          <p>لیست خبرها به صورت کارت‌های ساده نمایش داده شده تا در گوشی شلوغ نشود.</p>
+        </div>
+      </div>
 
-    // دکمه‌های میان‌بُر
-    document.querySelectorAll('[data-page-jump]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        showPage(a.getAttribute('data-page-jump'));
-      });
-    });
+      <div class="news-list">
+        <div class="news-item">
+          <h3>انتشار نسخه موبایل‌فرندلی</h3>
+          <p>نسخه جدید برای نمایش بهتر در گوشی با منوی جمع‌شونده و چیدمان ساده آماده شد.</p>
+        </div>
+        <div class="news-item">
+          <h3>بهبود ظاهر هدر</h3>
+          <p>هدر فشرده‌تر و مناسب‌تر برای صفحه کوچک طراحی شد.</p>
+        </div>
+        <div class="news-item">
+          <h3>اضافه شدن دکمه‌های بزرگ‌تر</h3>
+          <p>دکمه‌ها برای لمس راحت‌تر در موبایل بزرگ‌تر و خواناتر شدند.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // باز کردن صفحه بر اساس هش
-    const hash = (location.hash || "").replace("#","");
-    if (hash && document.getElementById('page-'+hash)) showPage(hash);
+  <!-- Contact -->
+  <section class="page" id="contact">
+    <div class="content-card">
+      <div class="section-head">
+        <div>
+          <h2>تماس با ما</h2>
+          <p>فرم نمونه و اطلاعات ارتباطی برای ظاهر حرفه‌ای‌تر سایت.</p>
+        </div>
+      </div>
 
-    // فرم (نمایشی)
-    const contactForm = document.getElementById('contactForm');
-    const formHint = document.getElementById('formHint');
-    contactForm.addEventListener('submit', (e)=>{
+      <div class="grid-3">
+        <div class="contact-item">
+          <h3>لینک تابعیت</h3>
+          <p><a href="https://ble.ir/join/HgMRZB1M73" target="_blank" rel="noopener">ble.ir/join/HgMRZB1M73</a></p>
+        </div>
+        <div class="contact-item">
+          <h3>پشتیبانی</h3>
+          <p>این بخش می‌تواند بعداً به پشتیبانی واقعی وصل شود.</p>
+        </div>
+        <div class="contact-item">
+          <h3>فرم پیام</h3>
+          <p>نمونه‌ای برای دریافت پیام کاربران در آینده.</p>
+        </div>
+      </div>
+
+      <div style="height: 14px"></div>
+
+      <form onsubmit="return false;">
+        <input type="text" placeholder="نام شما" />
+        <input type="email" placeholder="ایمیل شما" />
+        <textarea placeholder="پیام شما"></textarea>
+        <button class="btn btn-primary" type="submit">ارسال پیام</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 دموکرات 10/21 — طراحی شده برای نمایش بهتر در موبایل و دسکتاپ
+</footer>
+
+<script>
+  const navLinks = document.querySelectorAll('.nav-link');
+  const pages = document.querySelectorAll('.page');
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinksList = document.getElementById('navLinks');
+
+  function openPage(pageId) {
+    pages.forEach(page => page.classList.toggle('active', page.id === pageId));
+    navLinks.forEach(link => link.classList.toggle('active', link.dataset.page === pageId));
+
+    // بستن منو در موبایل بعد از انتخاب
+    navLinksList.classList.remove('open');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
       e.preventDefault();
-      formHint.textContent = "ارسال واقعی متصل نشده است (نمونه UI). اگر خواستی بک‌اند هم اضافه می‌کنم.";
-      formHint.style.color = "rgba(99,179,255,.95)";
+      openPage(link.dataset.page);
     });
+  });
 
-    // JS اختیاری فقط برای UI/دسترسی: افزودن کلیک به دکمه و باز کردن امن
-    const joinBtn = document.getElementById('joinMainBtn');
-    joinBtn.addEventListener('click', (e)=>{
-      // اگر بخواهی، می‌توانیم اینجا tracking هم انجام دهیم؛ فعلاً فقط اجازه می‌دهیم مسیر اجرا شود.
-      // (این JS برای "سایت حرفه‌ای" است؛ کاربر همان لینک را باز می‌کند.)
-    });
+  menuBtn.addEventListener('click', () => {
+    navLinksList.classList.toggle('open');
+  });
 
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  // باز شدن صفحه بر اساس hash
+  function openByHash() {
+    const hash = location.hash.replace('#', '');
+    if (hash && document.getElementById(hash)) openPage(hash);
+  }
+
+  window.addEventListener('hashchange', openByHash);
+  openByHash();
+</script>
+
 </body>
 </html>
